@@ -1,11 +1,22 @@
 # tensorflowmobile
 TensorFlow moblie and TensorFlow Lite on Android Phone
 
+# Resource ：
+	https://developer.android.google.cn/ndk/guides/neuralnetworks/index.html
+	https://developer.android.google.cn/about/versions/oreo/android-8.1.html
+	https://tensorflow.google.cn/
+	https://github.com/googlecodelabs/tensorflow-for-poets-2
 
-实现的功能：
-	将一个二维数据（1x2） 自加一次（每个元素乘2）
 
-各自目录下的python中包含数据的脚本
+# 实现的功能 :
+	1. 单个输入单个输出，将一个二维数据（1x2 matrix） 自加一次（每个元素乘2） [Mobile]
+		out = in + in
+		MobileDemo/python/mobile_android.py
+	2. 多个输入多个输出， in1 = 1x2 matrix , in2 = 1x2 matrix [lite]
+		out1 = in1 + in2
+		out2 = in1 + in2 + in2
+		TFLiteDemo/python/lite_android.py
+
 
 # Android NN HAL (只有Lite使用):
 	1. 接口： aosp/hardware/interfaces/neuralnetworks
@@ -19,7 +30,7 @@ TensorFlow moblie and TensorFlow Lite on Android Phone
         5). 执行nn代码， 如果优化不存在执行google默认代码，否则执行厂商优化代码
 
 # TensorFlow Lite： 
-	1. 必须将数据设置为二维数组，并与模型一致。 部分对象需要使用lite版本（如Session）
+	1. 必须将数据设置为二维数组(python 模型是1x2的矩阵)，并与模型一致。 部分对象需要使用lite版本（如Session）
 	2. 单个输入、单个输出，使用run， 多个输入或多个输出使用runForMultipleInputsOutputs
 	3. build.gradle :
 		必须不能压缩
