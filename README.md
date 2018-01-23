@@ -62,3 +62,28 @@ TensorFlow moblie and TensorFlow Lite on Android Phone
         2). 使用feed， 提供输入数据， 如需要识别的图片。 如果有多个参数需要输入， 就调用多次, 通过python之前定义的name来关联
         3). 使用run, 运行推理
         4). 使用fetch，获取推理结果
+
+# Linux
+	1. 获取最新代码 https://github.com/tensorflow/tensorflow
+	2. 安装sudo apt-get install eigen3
+	3. protobuf版本必须与TensorFlow中一致
+		curl -SsL -O https://github.com/google/protobuf/archive/v${PROTOBUF_VERSION}.tar.gz
+		tar xzf v${PROTOBUF_VERSION}.tar.gz
+		cd $DIR/protobuf-${PROTOBUF_VERSION}
+		./autogen.sh
+		./configure --prefix=/usr
+		make -j8
+		sudo make install
+	4. 编译Tensorflow
+		./configure
+		bazel build :libtensorflow_cc.so
+		tensorflow/contrib/makefile$ ./build_all_linux.sh
+	5. 拷贝库
+		libtensorflow_cc.so libtensorflow_framework.so => Linux/lib
+	6. 编译运行
+		Linux/build$ cmake ..
+		Linux/build$ make
+		Linux/build$ ./tf_test
+
+
+
