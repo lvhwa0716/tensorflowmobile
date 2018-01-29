@@ -19,7 +19,7 @@ TensorFlow moblie and TensorFlow Lite on Android Phone
          ":android_extended_ops_headers",
 
 
-#Build Moblie jni from Source
+# Build Moblie jni from Source
 	1. bazel build //tensorflow/contrib/android:android_tensorflow_inference_java
 	   output : 
 	       bazel-bin/tensorflow/contrib/android/libandroid_tensorflow_inference_java.jar
