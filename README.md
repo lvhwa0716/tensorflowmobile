@@ -1,5 +1,7 @@
 # tensorflowmobile
 TensorFlow moblie and TensorFlow Lite on Android Phone
+
+
 # Build From Source
    Must Use NDK R14b(http://www.oreilly.com/data/free/building-mobile-applications-with-tensorflow.csp)
    1. git clone --recurse-submodules https://github.com/tensorflow/tensorflow newSrc
@@ -16,6 +18,19 @@ TensorFlow moblie and TensorFlow Lite on Android Phone
 +        "listdiff_op.cc", ## ListDiff
          ":android_extended_ops_headers",
 
+
+#Build Moblie jni from Source
+	1. bazel build //tensorflow/contrib/android:android_tensorflow_inference_java
+	   output : 
+	       bazel-bin/tensorflow/contrib/android/libandroid_tensorflow_inference_java.jar
+	       
+	2. bazel build -c opt //tensorflow/contrib/android:libtensorflow_inference.so \
+	    --crosstool_top=//external:android/crosstool \
+	    --host_crosstool_top=@bazel_tools//tools/cpp:toolchain --cpu=armeabi-v7a
+	    
+	    output: 
+	        bazel-bin/tensorflow/contrib/android/libtensorflow_inference.so
+	
 # Resource ：
 	https://developer.android.google.cn/ndk/guides/neuralnetworks/index.html
 	https://developer.android.google.cn/about/versions/oreo/android-8.1.html
