@@ -1,5 +1,20 @@
 # tensorflowmobile
 TensorFlow moblie and TensorFlow Lite on Android Phone
+# Build From Source
+   Must Use NDK R14b(http://www.oreilly.com/data/free/building-mobile-applications-with-tensorflow.csp)
+   1. git clone --recurse-submodules https://github.com/tensorflow/tensorflow newSrc
+   2. 修改 WORKSPACE文件,加入sdk/ndk路径
+   3. bazel build -c opt //tensorflow/examples/android:tensorflow_demo
+   4. adb install -r bazel-bin/tensorflow/examples/android/tensorflow_demo.apk
+   
+   PR1: Executor failed to create kernel. Not found: No registered 'ListDiff' OpKernel for CPU devices
+        tensorflow/core/kernels/BUILD android_extended_ops_group1 增加(ADD)
+	@@ -4808,6 +4808,7 @@ filegroup(
+         "population_count_op.cc",
+         "population_count_op.h",
+         "winograd_transform.h",
++        "listdiff_op.cc", ## ListDiff
+         ":android_extended_ops_headers",
 
 # Resource ：
 	https://developer.android.google.cn/ndk/guides/neuralnetworks/index.html
