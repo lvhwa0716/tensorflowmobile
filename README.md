@@ -3,20 +3,20 @@ TensorFlow moblie and TensorFlow Lite on Android Phone
 
 
 # Build From Source
-   Must Use NDK R14b(http://www.oreilly.com/data/free/building-mobile-applications-with-tensorflow.csp)
-   1. git clone --recurse-submodules https://github.com/tensorflow/tensorflow newSrc
-   2. 修改 WORKSPACE文件,加入sdk/ndk路径
-   3. bazel build -c opt //tensorflow/examples/android:tensorflow_demo
-   4. adb install -r bazel-bin/tensorflow/examples/android/tensorflow_demo.apk
-   
-   PR1: Executor failed to create kernel. Not found: No registered 'ListDiff' OpKernel for CPU devices
-        tensorflow/core/kernels/BUILD android_extended_ops_group1 增加(ADD)
-		@@ -4808,6 +4808,7 @@ filegroup(
-		 "population_count_op.cc",
-		 "population_count_op.h",
-		 "winograd_transform.h",
-	+        "listdiff_op.cc", ## ListDiff
-		 ":android_extended_ops_headers",
+	Must Use NDK R14b(http://www.oreilly.com/data/free/building-mobile-applications-with-tensorflow.csp)
+	1. git clone --recurse-submodules https://github.com/tensorflow/tensorflow newSrc
+	2. 修改 WORKSPACE文件,加入sdk/ndk路径
+	3. bazel build -c opt //tensorflow/examples/android:tensorflow_demo
+	4. adb install -r bazel-bin/tensorflow/examples/android/tensorflow_demo.apk
+	
+	PR1: Executor failed to create kernel. Not found: No registered 'ListDiff' OpKernel for CPU devices
+		tensorflow/core/kernels/BUILD android_extended_ops_group1 增加(ADD)
+			@@ -4808,6 +4808,7 @@ filegroup(
+			"population_count_op.cc",
+			"population_count_op.h",
+			"winograd_transform.h",
+			+        "listdiff_op.cc", ## ListDiff
+			":android_extended_ops_headers",
 
 
 # Build Moblie jni from Source
@@ -118,7 +118,7 @@ TensorFlow moblie and TensorFlow Lite on Android Phone
 			compile 'org.tensorflow:tensorflow-android:+'
 		}
 	 3. 流程
-		1). 使用pb文件初始化org.tensorflow.contrib.android.TensorFlowInferenceInterface
+	1). 使用pb文件初始化org.tensorflow.contrib.android.TensorFlowInferenceInterface
         2). 使用feed， 提供输入数据， 如需要识别的图片。 如果有多个参数需要输入， 就调用多次, 通过python之前定义的name来关联
         3). 使用run, 运行推理
         4). 使用fetch，获取推理结果
