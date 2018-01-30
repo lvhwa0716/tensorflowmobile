@@ -11,12 +11,12 @@ TensorFlow moblie and TensorFlow Lite on Android Phone
    
    PR1: Executor failed to create kernel. Not found: No registered 'ListDiff' OpKernel for CPU devices
         tensorflow/core/kernels/BUILD android_extended_ops_group1 增加(ADD)
-	@@ -4808,6 +4808,7 @@ filegroup(
-         "population_count_op.cc",
-         "population_count_op.h",
-         "winograd_transform.h",
-+        "listdiff_op.cc", ## ListDiff
-         ":android_extended_ops_headers",
+		@@ -4808,6 +4808,7 @@ filegroup(
+		 "population_count_op.cc",
+		 "population_count_op.h",
+		 "winograd_transform.h",
+	+        "listdiff_op.cc", ## ListDiff
+		 ":android_extended_ops_headers",
 
 
 # Build Moblie jni from Source
@@ -31,6 +31,36 @@ TensorFlow moblie and TensorFlow Lite on Android Phone
 	    output: 
 	        bazel-bin/tensorflow/contrib/android/libtensorflow_inference.so
 	
+# Build Lite jni from Source
+        1. ./tensorflow/contrib/lite/java/build_aar_for_release.sh --verbose+failures
+	   output: ./tflite-1.0.aar
+	   
+	   PR: kernel_default.h:88:2: error: "SIMD not enabled, you'd be getting a slow software
+	      FIX : add x86 "-msse4"
+	       tensorflow/contrib/lite/kernels/internal/BUILD
+	      NEON_FLAGS_IF_APPLICABLE = select({
+		    ":arm": [
+			"-O3",
+			"-mfpu=neon",
+			"-mfloat-abi=softfp",
+		    ],
+		    ":armeabi-v7a": [
+			"-O3",
+			"-mfpu=neon",
+			"-mfloat-abi=softfp",
+		    ],
+		    ":armv7a": [
+			"-O3",
+			"-mfpu=neon",
+			"-mfloat-abi=softfp",
+		    ],
+		    "//conditions:default": [
+			"-O3",
+		    ],
+		     ":x86": [
+			"-msse4",
+		    ],
+		})
 # Resource ：
 	https://developer.android.google.cn/ndk/guides/neuralnetworks/index.html
 	https://developer.android.google.cn/about/versions/oreo/android-8.1.html
