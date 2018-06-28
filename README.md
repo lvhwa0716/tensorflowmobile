@@ -1,6 +1,12 @@
 # tensorflowmobile
 TensorFlow moblie and TensorFlow Lite on Android Phone
 
+# Resource ：
+	https://developer.android.google.cn/ndk/guides/neuralnetworks/index.html
+	https://developer.android.google.cn/about/versions/oreo/android-8.1.html
+	https://tensorflow.google.cn/
+	https://github.com/googlecodelabs/tensorflow-for-poets-2
+	https://tensorflow.google.cn/mobile/android_build
 
 # Build From Source
 	Must Use NDK R14b(http://www.oreilly.com/data/free/building-mobile-applications-with-tensorflow.csp)
@@ -61,11 +67,7 @@ TensorFlow moblie and TensorFlow Lite on Android Phone
 			"-msse4",
 		    ],
 		})
-# Resource ：
-	https://developer.android.google.cn/ndk/guides/neuralnetworks/index.html
-	https://developer.android.google.cn/about/versions/oreo/android-8.1.html
-	https://tensorflow.google.cn/
-	https://github.com/googlecodelabs/tensorflow-for-poets-2
+
 
 
 # 实现的功能 :
